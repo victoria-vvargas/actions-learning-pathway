@@ -1,0 +1,11 @@
+name: hello-world #Giving a descriptive name will help you to improve readability and help others understand the workflow's purpose.
+
+on: push #the event you want the workflow to trigger on , in this case a push event, when you push a commit or tag.
+
+jobs: #define what happens when the workflow runs. Series of interrelated and executable steps.
+  hello-world-job: #name of the job
+    runs-on: ubuntu-latest #machine that will execute the job in the workflow.
+    steps: #what the job is made of
+      - name: Checkput repository code 
+        uses: actions/checkout@v3 #This action allows workflow to access the contents of the repository so it can run scriots and other actions agains it. 
+      - run: echo "$(cat hello_world.txt)" #This step runs a bash script that echoes Hello world phrase which is stored in the repository in the hello-world.txt file
