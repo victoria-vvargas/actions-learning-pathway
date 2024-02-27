@@ -12,7 +12,18 @@ jobs:
                 node-version: '18.x'
             - run: npm install #to build code locally with this commands. To build our Next.js appication with npm
             - run: npm run build 
-
-
+    
+    test: #jobs are completely independent of each other. We can run them in parallel
+        needs: build #test job will only run if the build job is successful. If the build job fails, the test job will not run
+        runs-on: ubuntu-latest
+        steps: #steps are scoped locally to the job and need to be repeated for each job.
+            - name: Checkout repository code
+              uses: actions/checkout@v3
+            - name: use node.js
+              uses: actions/setup-node@v3 #need this action since we are using Node.js
+              with:
+                node-version: '18.x'
+            - run: npm install #to build code locally with this commands. To build our Next.js appication with npm
+            - run: npm run test #to test our code locally with this commands. To test our Next.js appication with npm
 
 
